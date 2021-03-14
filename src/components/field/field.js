@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {Cell} from '../cell/cell'
+import './field.scss'
+
 
 export const Field = () => {
 
@@ -31,8 +33,10 @@ export const Field = () => {
   }
  
   return (
-    <div>
+    <div className="field">
+      <div className="field-wrapper">
       { cells.map(row => row.map(cell => (<Cell isBomb={cell.isBomb} title={cell.title}/>)))}
+      </div>
     </div>
   )
 }

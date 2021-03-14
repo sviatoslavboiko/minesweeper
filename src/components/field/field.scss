@@ -1,0 +1,9 @@
+.field{
+  display: grid;
+  justify-content: center;
+  align-self: center;
+}
+.field-wrapper{
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+}
