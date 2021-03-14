@@ -42,6 +42,8 @@ export const cellsArrGenerator = () => {
       cells[i][j] = {
         title: "Hello I am cell",
         isBomb: false,
+        isOpen: false,
+        coords: {i,j},
         number: null
       }
     }
