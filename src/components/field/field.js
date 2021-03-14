@@ -15,7 +15,7 @@ export const Field = () => {
   return (
     <div className="field">
       <div className="field-wrapper">
-      { cells.map(row => row.map(cell => (<Cell isBomb={cell.isBomb} title={cell.title}/>)))}
+      { cells.map(row => row.map(cell => (<Cell isBomb={cell.isBomb} title={cell.title} number={cell.number}/>)))}
       </div>
     </div>
   )
