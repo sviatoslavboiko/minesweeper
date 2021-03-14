@@ -1,11 +1,13 @@
 import React, {useState, useEffect} from 'react';
+import classNames from 'classnames';
 import './cell.scss'
 
 export const Cell = ({isBomb, title}) => {
+
   const [bomb, setBomb] = useState(isBomb)
 
   return (
-    <div className="cell">
+    <div className={classNames('cell', {red: bomb, green: !bomb})}>
       title
     </div>
   )
