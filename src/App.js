@@ -1,10 +1,11 @@
-import logo from './logo.svg';
 import './App.scss';
 import { Field } from './components/field/field';
 
 function App() {
   return (
+    <>
     <Field />
+    </>
   );
 }
 
