@@ -1,18 +1,23 @@
 .cell {
   width: 40px;
   height: 40px;
-
+  display: flex;
+  cursor: pointer;
   border: 1px black solid;
+  background-color: green;
+  justify-content: center;
+  align-items: center;
 }
 
 .red {
   background-color: red;
 }
 
-.green {
-  background-color: green;
-}
-
 .gray {
   background-color: gray;
+}
+
+.orange {
+  background-image: url(https://www.google.com/logos/fnbx/minesweeper/flag_icon.png);
+  background-size: contain; 
 }

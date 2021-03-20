@@ -1,0 +1,18 @@
+.header{
+  display: grid;
+  justify-content: center;
+  padding:0;
+
+}
+.header-wrapper{
+  display: flex;
+  width: 380px;
+  padding: 20px;
+  background-color: green;
+  justify-content: space-between;
+  font-family: sans-serif;
+}
+
+.start-btn{
+  cursor: pointer;
+}

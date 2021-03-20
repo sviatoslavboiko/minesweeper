@@ -17,7 +17,7 @@ export const Field = () => {
   return (
     <div className="field">
       <div className="field-wrapper">
-      { cells.map(row => row.map(cell => (<Cell key={new Date() * Math.random()} isBomb={cell.isBomb} title={cell.title} visibilytyConroller={setMWVisibility} number={cell.number}/>)))}
+      { cells.map(row => row.map(cell => (<Cell key={new Date() * Math.random()} isBomb={cell.isBomb} title={cell.title} isChecked={cell.isChecked} visibilytyConroller={setMWVisibility} number={cell.number}/>)))}
       </div>
       <ModalInFunctionalComponent isModalWindowOpen={isModalWindowOpen} visibilytyConroller={setMWVisibility} setCellsController={setCells} />
     </div>

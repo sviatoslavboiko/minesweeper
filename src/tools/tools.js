@@ -43,6 +43,7 @@ export const cellsArrGenerator = () => {
         title: "Hello I am cell",
         isBomb: false,
         isOpen: false,
+        isChecked: false,
         coords: {i,j},
         number: null
       }
