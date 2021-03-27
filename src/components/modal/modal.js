@@ -1,14 +1,16 @@
 import React, {useState} from 'react';
 import Modal from 'react-modal';
 import './modal.scss';
-import { cellsArrGenerator } from '../../tools/tools'; 
+import { connect } from 'react-redux'
+import {generateCells} from '../../redux/actions'
+// import { cellsArrGenerator } from '../../tools/tools'; 
 
 
-function ModalInFunctionalComponent ({isModalWindowOpen, visibilytyConroller, setCellsController}){
+function ModalInFunctionalComponent ({isModalWindowOpen, visibilytyConroller, generateCells}){
 
     const setModalIsOpenToFalse = () => {
         visibilytyConroller(false);
-        setCellsController(cellsArrGenerator());
+        generateCells();
     }
 
     const customStyles = {
@@ -32,4 +34,9 @@ function ModalInFunctionalComponent ({isModalWindowOpen, visibilytyConroller, se
         </>
     )
 }
-export default ModalInFunctionalComponent;  
+
+const mapDispatchToProps = {
+  generateCells
+}
+
+export default connect(null, mapDispatchToProps)(ModalInFunctionalComponent);

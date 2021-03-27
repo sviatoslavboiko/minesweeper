@@ -1,5 +1,5 @@
 import './App.scss';
-import { Field } from './components/field/field';
+import Field from './components/field/field';
 import { Header } from './components/header/header'
 
 function App() {

@@ -78,3 +78,75 @@ export const cellsArrGenerator = () => {
 
   return cells;
 }
+
+export const zerosOpener = ({i, j}, cells) => {
+  const reccurenceHolder = [];
+  const openedZeros = []
+
+  const newCells = JSON.parse(JSON.stringify(cells));
+
+const foo = (i, j) => {
+
+if(reccurenceHolder.includes(`${i}${j}`)) {
+  return;
+}
+
+reccurenceHolder.push(`${i}${j}`)
+if(!newCells[i] || !newCells[i][j]) {
+  return;
+}
+
+if(newCells[i][j].number === 0) {
+  newCells[i][j].isOpen = true;
+  openedZeros.push(`${i}${j}`)
+}else {
+  return;
+}
+
+
+for (let inI = -1; inI <= 1; inI++) {
+  for (let inJ = -1; inJ <= 1; inJ++) {
+    const Is = i + inI;
+    const Js = j + inJ;
+    if(Is !== i || Js !== j) {
+       foo(Is, Js)
+      }
+    }
+  }
+}
+
+
+  foo(i, j)
+
+  openedZeros.forEach(item => {
+    const k = item.split('');
+    const i = +k[0];
+    const j = +k[1];
+
+      for (let inI = -1; inI <= 1; inI++) {
+        for (let inJ = -1; inJ <= 1; inJ++) {
+          const Is = i + inI;
+          const Js = j + inJ;
+          if(Is !== i || Js !== j) {
+            if(!newCells[Is] || !newCells[Is][Js]) {
+              continue;
+            }
+            if(!newCells[Is][Js].isBomb) {
+              newCells[Is][Js].isOpen = true
+            }
+            }
+          }
+        }
+    
+  })
+
+  return newCells;
+}
+
+export const positiveOpener = ({i, j}, cells) => {
+  const newCells = JSON.parse(JSON.stringify(cells))
+
+  newCells[i][j].isOpen = true;
+
+  return newCells;
+}
