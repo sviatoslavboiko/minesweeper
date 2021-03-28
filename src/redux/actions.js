@@ -1,5 +1,5 @@
 import { cellsArrGenerator, zerosOpener, positiveOpener } from "../tools/tools";
-import { GENERATE_CELLS, OPEN_POSITIVE_CELL, OPEN_ZERO_CELL } from "./types";
+import { CLOSE_MODAL_WINDOW, GENERATE_CELLS, OPEN_MODAL_WINDOW, OPEN_POSITIVE_CELL, OPEN_ZERO_CELL } from "./types";
 
 export function generateCells() {
   return {
@@ -19,5 +19,19 @@ export function openPositiveCell(coords, cells) {
   return {
     type: OPEN_POSITIVE_CELL,
     payload: positiveOpener(coords, cells)
+  }
+}
+
+export function openModalWindow() {
+  return {
+    type: OPEN_MODAL_WINDOW,
+    payload: true,
+  }
+}
+
+export function closeModalWindow() {
+  return {
+    type: CLOSE_MODAL_WINDOW,
+    payload: false,
   }
 }

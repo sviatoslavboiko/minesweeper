@@ -2,14 +2,14 @@ import React, {useState} from 'react';
 import Modal from 'react-modal';
 import './modal.scss';
 import { connect } from 'react-redux'
-import {generateCells} from '../../redux/actions'
+import {generateCells, closeModalWindow} from '../../redux/actions'
 // import { cellsArrGenerator } from '../../tools/tools'; 
 
 
-function ModalInFunctionalComponent ({isModalWindowOpen, visibilytyConroller, generateCells}){
+function ModalInFunctionalComponent ({isOpen, visibilytyConroller, generateCells, closeModalWindow}){
 
     const setModalIsOpenToFalse = () => {
-        visibilytyConroller(false);
+        closeModalWindow();
         generateCells();
     }
 
@@ -27,7 +27,7 @@ function ModalInFunctionalComponent ({isModalWindowOpen, visibilytyConroller, ge
 
     return(
         <>
-            <Modal isOpen={isModalWindowOpen} style={customStyles} onRequestClose={()=> setModalIsOpenToFalse()} ariaHideApp={false}>
+            <Modal isOpen={isOpen} style={customStyles} onRequestClose={()=> setModalIsOpenToFalse()} ariaHideApp={false}>
               <button onClick={setModalIsOpenToFalse}>x</button>
               <p>You lose!</p>
             </Modal>
@@ -35,8 +35,16 @@ function ModalInFunctionalComponent ({isModalWindowOpen, visibilytyConroller, ge
     )
 }
 
-const mapDispatchToProps = {
-  generateCells
+const mapStateToProps = state => {
+  console.log(state);
+  return {
+    isOpen: state.app.modalWindowVisibility
+  }
 }
 
-export default connect(null, mapDispatchToProps)(ModalInFunctionalComponent);
+const mapDispatchToProps = {
+  generateCells,
+  closeModalWindow
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ModalInFunctionalComponent);

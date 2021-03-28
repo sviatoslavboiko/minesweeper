@@ -1,10 +1,22 @@
 import React, {useState, useEffect} from 'react';
 import { connect } from 'react-redux'
-import { openZeroCell, openPositiveCell } from '../../redux/actions'
+import { openZeroCell, openPositiveCell, openModalWindow } from '../../redux/actions'
 import classNames from 'classnames';
 import './cell.scss';
 
-const Cell = ({title, isBomb, isOpen, isChecked, visibilytyConroller, number, resetCells, coords, openZeroCell, myCells, openPositiveCell}) => {
+const Cell = (
+  {
+    isBomb,
+    isOpen,
+    isChecked,
+    visibilytyConroller,
+    number,
+    coords,
+    openZeroCell,
+    myCells,
+    openPositiveCell,
+    openModalWindow
+  }) => {
 
   const [bomb, setBomb] = useState(isBomb)
   const [open, setOpen] = useState(isOpen)
@@ -24,7 +36,7 @@ const Cell = ({title, isBomb, isOpen, isChecked, visibilytyConroller, number, re
       openPositiveCell(coords, myCells);
 
     if(bomb){
-      visibilytyConroller(true);
+      openModalWindow();
     }   
     else {
       if(number === 0) {
@@ -44,13 +56,15 @@ const Cell = ({title, isBomb, isOpen, isChecked, visibilytyConroller, number, re
 const mapStateToProps = state => {
   console.log(state);
   return {
-    myCells: state.cells.cells
+    myCells: state.cells.cells,
+    isModalWindowOpen: state.app.modalWindowVisibility,
   }
 }
 
 const mapDispatchToProps = {
   openZeroCell,
-  openPositiveCell
+  openPositiveCell,
+  openModalWindow,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cell)
