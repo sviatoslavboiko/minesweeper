@@ -33,9 +33,12 @@ export const cellsArrGenerator = () => {
 
   const numbersToCoords = [];
 
-  numberGenerator(numbersToCoords)
+    numberGenerator(numbersToCoords)
 
-  const coords = cooardinator(numbersToCoords);
+    const coords = cooardinator(numbersToCoords);
+
+
+
 
   for (let i = 0; i < I; i++) {
     for (let j = 0; j < J; j++) {
@@ -143,10 +146,46 @@ for (let inI = -1; inI <= 1; inI++) {
   return newCells;
 }
 
-export const positiveOpener = ({i, j}, cells) => {
+export const openPositive = ({i, j}, cells) => {
   const newCells = JSON.parse(JSON.stringify(cells))
 
   newCells[i][j].isOpen = true;
 
   return newCells;
 }
+
+export const flagCell = ({i,j}, cells) => {
+  const newCells = JSON.parse(JSON.stringify(cells));
+
+  newCells[i][j].isChecked = true;
+
+  return newCells;
+}
+
+export const unflagCell = ({i,j}, cells) => {
+  const newCells = JSON.parse(JSON.stringify(cells));
+
+  newCells[i][j].isChecked = false;
+
+  return newCells;
+}
+
+export const regenerateAndOpenCell = ({i, j}) => {
+
+
+  const cells = cellsArrGenerator()
+
+  if(cells[i][j].isBomb) {
+   return regenerateAndOpenCell({i, j})
+  }else{
+    if(cells[i][j].number !== 0 && !cells[i][j].bomb) {
+      return openPositive({i, j}, cells)
+    }else {
+      return zerosOpener({i, j}, cells)
+    }
+  }
+
+
+}
+
+

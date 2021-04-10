@@ -1,4 +1,4 @@
-import { GENERATE_CELLS, OPEN_POSITIVE_CELL, OPEN_ZERO_CELL } from "./types"
+import { GENERATE_CELLS, OPEN_POSITIVE_CELL, OPEN_ZERO_CELL, MARK_CELL, UNMARK_CELL, IS_BOMB_REGENERATE_CELLS } from "./types"
 
 const initialState = {
   cells: [],
@@ -11,6 +11,12 @@ export const cellsReducer = (state = initialState, action) => {
     case OPEN_ZERO_CELL:
       return {...state, cells: action.payload}
     case OPEN_POSITIVE_CELL:
+      return {...state, cells: action.payload}
+    case MARK_CELL:
+      return {...state, cells: action.payload}
+    case UNMARK_CELL:
+      return {...state, cells: action.payload}
+    case IS_BOMB_REGENERATE_CELLS:
       return {...state, cells: action.payload}
     default: return state
   }

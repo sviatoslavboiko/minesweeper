@@ -7,7 +7,7 @@ import { cellsArrGenerator } from '../../tools/tools';
 import ModalInFunctionalComponent from '../modal/modal';
 
 
-const Field = ({generateCells, myCells, isModalWindowOpen}) => {
+const Field = ({generateCells, myCells, isModalWindowOpen, isTimerStarted}) => {
 
   const [cells, setCells] = useState();
   // const [isModalWindowOpen, setMWVisibility] = useState(false);
@@ -15,7 +15,7 @@ const Field = ({generateCells, myCells, isModalWindowOpen}) => {
   useEffect(() => {
     generateCells();
   }, [])
-
+  
  
   return (
     <div className="field">
@@ -26,6 +26,7 @@ const Field = ({generateCells, myCells, isModalWindowOpen}) => {
         key={new Date() * Math.random()}
         isBomb={cell.isBomb}
         isOpen={cell.isOpen}
+        isChecked={cell.isChecked}
         title={cell.title}
         number={cell.number}
         coords={cell.coords}
@@ -43,7 +44,8 @@ const mapStateToProps = state => {
   console.log(state);
   return {
     myCells: state.cells.cells,
-    isModalWindowOpen: state.app.modalWindowVisibility
+    isModalWindowOpen: state.app.modalWindowVisibility,
+    isTimerStarted: state.app.isTimerStarted,
   }
 }
 
