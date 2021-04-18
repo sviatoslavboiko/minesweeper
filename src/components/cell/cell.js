@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { connect } from 'react-redux'
-import { openZeroCell, openPositiveCell, openModalWindow, markCell, unMarkCell, decreaseFlags, increaseFlags, startTimer, generateCells, isBombRegenerateCell } from '../../redux/actions'
+import { openZeroCell, openPositiveCell, openModalWindow, markCell, unMarkCell, decreaseFlags, increaseFlags, startTimer, generateCells, isBombRegenerateCell, openCell } from '../../redux/actions'
 import classNames from 'classnames';
 import './cell.scss';
 
@@ -9,7 +9,6 @@ const Cell = (
     isBomb,
     isOpen,
     isChecked,
-    visibilytyConroller,
     number,
     coords,
     openZeroCell,
@@ -23,8 +22,8 @@ const Cell = (
     flagsCount,
     isTimerStarted,
     startTimer,
-    generateCells,
-    isBombRegenerateCell
+    isBombRegenerateCell,
+    openCell
   }) => {
 
   const [bomb, setBomb] = useState(isBomb)
@@ -46,40 +45,11 @@ const Cell = (
       }
 
     }
-    
   }
 
   const cellClickHandler = () => {
-
-    if(!isTimerStarted) {
-      if(bomb) {
-        isBombRegenerateCell(coords)
-        startTimer()
-      }else {
-        if(!isChecked){
-          startTimer()
-          openPositiveCell(coords, myCells);
-
-          if(number === 0) {
-            openZeroCell(coords, myCells)
-          }
-        }
-        }
-      } else {
-      if(!isChecked){
-        openPositiveCell(coords, myCells);
-      if(bomb){
-        openModalWindow();
-      }   
-      else {
-        if(number === 0) {
-          openZeroCell(coords, myCells)
-        }
-      }
-      }
-    }
-
     
+    openCell(coords, isBomb, number)
   }
 
   return (
@@ -111,6 +81,7 @@ const mapDispatchToProps = {
   startTimer,
   generateCells,
   isBombRegenerateCell,
+  openCell,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cell)

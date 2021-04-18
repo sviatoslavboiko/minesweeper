@@ -11,12 +11,47 @@ import {
   INCREASE_FLAGS,
   START_TIMER,
   IS_BOMB_REGENERATE_CELLS,
+  OPEN_CELL,
 } from "./types";
 
 export function generateCells() {
   return {
     type: GENERATE_CELLS,
     payload: cellsArrGenerator()
+  }
+}
+
+export function openCell({i, j}, bomb, number) {
+
+  return (dispatch, getState) => {
+    const { cells } = getState().cells;
+    const { isTimerStarted } = getState().app
+    if(!isTimerStarted) {
+      if(bomb) {
+        dispatch({type: IS_BOMB_REGENERATE_CELLS, payload: regenerateAndOpenCell({i, j})})
+        dispatch({type: START_TIMER})
+      }else {
+        if(!cells[i][j].isChecked) {
+          dispatch({type: OPEN_POSITIVE_CELL, payload: openPositive({i,j}, cells)})
+          if(number === 0) {
+            dispatch({type: OPEN_ZERO_CELL, payload: zerosOpener({i,j}, cells)})
+          }
+          dispatch({type: START_TIMER})
+        }
+      }
+
+    }else {
+      if (!cells[i][j].isChecked) {
+        dispatch({type: OPEN_POSITIVE_CELL, payload: openPositive({i,j}, cells)})
+        if(bomb) {
+          dispatch({type: OPEN_MODAL_WINDOW})
+        }else {
+          if(number === 0) {
+            dispatch({type: OPEN_ZERO_CELL, payload: zerosOpener({i,j}, cells)})
+          }
+        }
+      }
+    }
   }
 }
 
